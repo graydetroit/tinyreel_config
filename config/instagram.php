@@ -46,7 +46,7 @@ return [
         'local' => [
             'client_id' => env('IG_L_ID', null),
             'client_secret' => env('IG_L_SECRET', null),
-            'callback_url' => 'http://9ec5b8f4.ngrok.io/auth',
+            'callback_url' => 'http://d72290b5.ngrok.io/auth',
         ],
 
     ],

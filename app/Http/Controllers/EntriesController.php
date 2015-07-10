@@ -22,20 +22,27 @@ class EntriesController extends Controller
 
     protected function getEntries()
     {
-        $feed = Instagram::getUserFeed(10);
+        try {
 
-        $entries = [];
+            $feed = Instagram::getUserFeed(10);
+            $entries = [];
 
-        for ($i=0; $i < 10; $i++) {
-            array_push($entries, [
-                'username' => $feed->data[$i]->user->username,
-                'caption' => $feed->data[$i]->caption->text,
-                'likes' => $feed->data[$i]->likes->count,
-                'comments' => $feed->data[$i]->comments->count,
-                'url' => $feed->data[$i]->images->thumbnail->url
-            ]);
+            for ($i=0; $i < sizeof($feed->data); $i++) {
+                array_push($entries, [
+                    'username' => $feed->data[$i]->user->username,
+                    'caption' => $feed->data[$i]->caption->text,
+                    'likes' => $feed->data[$i]->likes->count,
+                    'comments' => $feed->data[$i]->comments->count,
+                    'url' => $feed->data[$i]->images->thumbnail->url
+                ]);
+            }
+
+            return \Response::json($entries, 200);
+
+        } catch(\Exception $e) {
+
+            return \Response::json("Error returning entries data, ".$e, 401);
+
         }
-
-        return \Response::json($entries);
     }
 }
