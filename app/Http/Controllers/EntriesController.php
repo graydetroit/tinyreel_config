@@ -24,7 +24,7 @@ class EntriesController extends Controller
     {
         try {
 
-            $feed = Instagram::getUserFeed(10);
+            $feed = Instagram::getUserFeed(30);
             $entries = [];
 
             for ($i=0; $i < sizeof($feed->data); $i++) {
