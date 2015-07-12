@@ -13,4 +13,10 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass('app.scss');
+    mix.scripts([
+        "app.js"
+    ]);
+    mix.copy('bower_components/pebble-slate/dist/css/slate.min.css', 'public/css');
+    mix.copy('bower_components/pebble-slate/dist/fonts/*.woff', 'public/fonts');
+    mix.copy('bower_components/pebble-slate/dist/js/slate.min.js', 'public/js');
 });

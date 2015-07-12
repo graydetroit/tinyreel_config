@@ -1,0 +1,31 @@
+.header {
+  padding-top: 40px;
+  font-family: "futura-pt",sans-serif;
+  font-weight: 800; }
+
+.header small {
+  display: block;
+  width: 270px;
+  margin: 0 auto;
+  font-family: 'PF DinDisplay Pro',sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 400; }
+
+.timer-loader {
+  margin-top: 20px; }
+
+.timer-loader:not(:required) {
+  border: 6px solid #ff4700 !important; }
+
+.timer-loader:not(:required)::before, .timer-loader:not(:required)::after {
+  background-color: #ff4700 !important; }
+
+img.profile-picture {
+  border: 2px solid white;
+  width: 100px; }
+
+.centered {
+  text-align: center; }
+
+/*# sourceMappingURL=app.css.map */

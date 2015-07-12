@@ -40,7 +40,7 @@ return [
         'production' => [
             'client_id' => env('IG_P_ID', null),
             'client_secret' => env('IG_P_SECRET', null),
-            'callback_url' => 'http://tinylens.jamesgraydev.com/auth',
+            'callback_url' => 'http://jamesgraydev.com/auth',
         ],
 
         'local' => [

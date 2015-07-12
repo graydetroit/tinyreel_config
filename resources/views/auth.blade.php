@@ -1,46 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layouts.master')
+@section('content')
+<div class="item-container centered">
+  <div class="item-container-content">
+    <div class="item">
+        <b>Hey, {{{$user->full_name}}}!</b><br/><br/>
+        @if ($user->profile_picture && $user->profile_picture != "")
+            <img class="profile-picture" src="{{{$user->profile_picture}}}" /><br/><br/>
+        @endif
+    </div>
+  </div>
+</div>
 
-        <link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">You're Authed</div>
-                <a href="pebblejs://close#{{$options}}">Now, close this window!</a>
-            </div>
-        </div>
-    </body>
-</html>
+<div class="item-container">
+    <div class="button-container">
+        <input type="button" class="item-button" value="Ok, close this!" onClick="location.href='pebblejs://close#{{$options}}'">
+    </div>
+</div>
+@endsection

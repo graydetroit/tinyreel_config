@@ -22,10 +22,21 @@ class AccessController extends Controller
     protected function getToken()
     {
         $code = \Request::get('code');
-        $data = Instagram::getOAuthToken($code);
-        $options = urlencode(json_encode(['token' => $data->access_token]));
-        session(['instagram_token' => $data]);
-        return view('auth')->with(compact('options'));
+
+        try {
+            $data = Instagram::getOAuthToken($code);
+            $token = $data->access_token;
+
+            $user = $data->user;
+            //dd($user);
+
+        } catch(\ErrorException $e){
+            return redirect('/');
+        }
+
+        $options = urlencode(json_encode(['token' => $token]));
+        session(['instagram_token' => $token]);
+        return view('auth')->with(compact('options', 'user'));
     }
 
 }
