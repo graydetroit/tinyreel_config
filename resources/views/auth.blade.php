@@ -13,7 +13,8 @@
 
 <div class="item-container">
     <div class="button-container">
-        <input type="button" class="item-button" value="Ok, close this!" onClick="location.href='pebblejs://close#{{$options}}'">
+        <input id="options" type="hidden" name="options" value="{{$options}}">
+        <input id="close" type="button" class="item-button" value="Ok, close this!">
     </div>
 </div>
 @endsection
