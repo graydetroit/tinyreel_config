@@ -41,7 +41,7 @@ class EntriesController extends Controller
 
         } catch(\Exception $e) {
 
-            return \Response::json("Error returning entries data, ".$e, 401);
+            return \Response::json("Error returning entries data", 401);
 
         }
     }
