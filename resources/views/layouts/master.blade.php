@@ -13,7 +13,7 @@
     <body>
         <div class="header centered">
             <h1>TINY REEL</h1><br/>
-            <small>View your instagram feed on your pebble!</small>
+            <small>Instagram on your Pebble!</small>
         </div>
         <div class="container">
             @yield('content')

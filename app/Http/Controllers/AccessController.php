@@ -19,23 +19,42 @@ class AccessController extends Controller
         return redirect($url);
     }
 
-    protected function getToken()
+    protected function getAuth()
     {
-        $code = \Request::get('code');
+        if(\Session::has('instagram_token') && \Session::has('user')){
+            $user = \Session::get('user');
+            $token = \Session::get('instagram_token');
+            $options = urlencode(json_encode(['token' => $token]));
+            //\Session::flush();
+            return view('auth')->with(compact('options', 'user'));
+        } else if(\Request::get('code')){
+            //dd('request');
+            return \App::make('App\Http\Controllers\AccessController')->getToken(\Request::get('code'));
+        } else {
+            return redirect('/');
+        }
+    }
+
+    protected function getToken($code)
+    {
+        function issetor(&$var, $default = false) {
+            return isset($var) ? $var : $default;
+        }
 
         try {
+            $code = issetor($code, \Request::get('code'));
+            //dd('code: '.$code);
             $data = Instagram::getOAuthToken($code);
             $token = $data->access_token;
-
             $user = $data->user;
-            //dd($user);
-
+            $options = urlencode(json_encode(['token' => $token]));
+            \Session::put('instagram_token', $token);
+            \Session::put('user', $user);
         } catch(\ErrorException $e){
+            //dd($e);
             return redirect('/');
         }
 
-        $options = urlencode(json_encode(['token' => $token]));
-        session(['instagram_token' => $token]);
         return view('auth')->with(compact('options', 'user'));
     }
 

@@ -22,6 +22,10 @@ class EntriesController extends Controller
 
     protected function getEntries()
     {
+        function issetor(&$var, $default = false) {
+            return isset($var) ? $var : $default;
+        }
+
         try {
 
             $feed = Instagram::getUserFeed(30);
@@ -29,18 +33,17 @@ class EntriesController extends Controller
 
             for ($i=0; $i < sizeof($feed->data); $i++) {
                 array_push($entries, [
-                    'username' => $feed->data[$i]->user->username,
-                    'caption' => $feed->data[$i]->caption->text,
-                    'likes' => $feed->data[$i]->likes->count,
-                    'comments' => $feed->data[$i]->comments->count,
-                    'url' => $feed->data[$i]->images->thumbnail->url
+                    'username' => issetor($feed->data[$i]->user->username, '...'),
+                    'caption' => issetor($feed->data[$i]->caption->text, ''),
+                    'likes' => issetor($feed->data[$i]->likes->count, '...'),
+                    'comments' => issetor($feed->data[$i]->comments->count, '...'),
+                    'url' => issetor($feed->data[$i]->images->thumbnail->url, 'http://placehold.it/144x168/000000?text=WHOOPS!')
                 ]);
             }
 
             return \Response::json($entries, 200);
 
         } catch(\Exception $e) {
-
             return \Response::json("Error returning entries data", 401);
 
         }

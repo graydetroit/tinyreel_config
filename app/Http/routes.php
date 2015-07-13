@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(\Session::has('instagram_token') && \Session::has('user')){
+        return Redirect::to('/auth');
+    } else {
+        return view('welcome');
+    }
 });
 
 Route::get('/login', [
@@ -20,7 +24,7 @@ Route::get('/login', [
 ]);
 
 Route::get('/auth', [
-    'as' => 'auth', 'uses' => 'AccessController@getToken'
+    'as' => 'auth', 'uses' => 'AccessController@getAuth'
 ]);
 
 //make api route group
