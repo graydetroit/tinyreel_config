@@ -59,4 +59,9 @@ class AccessController extends Controller
         return view('auth')->with(compact('options', 'user'));
     }
 
+    protected function getBugTest()
+    {
+        \Bugsnag::notifyError('ErrorType', 'Test Error');
+    }
+
 }

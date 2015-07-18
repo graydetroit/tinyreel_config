@@ -31,3 +31,7 @@ Route::get('/auth', [
 Route::get('/entries', [
     'as' => 'entries', 'uses' => 'EntriesController@getEntries'
 ]);
+
+Route::get('/bugtest', [
+	'as' => 'bugtest', 'uses' => 'AccessController@getBugTest'
+]);
