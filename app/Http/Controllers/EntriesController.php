@@ -16,8 +16,13 @@ class EntriesController extends Controller
      */
     public function __construct()
     {
-        $ig_session_token = session('instagram_token');
-        Instagram::setAccessToken($ig_session_token);
+        try {
+            $ig_session_token = session('instagram_token');
+            Instagram::setAccessToken($ig_session_token);
+        } catch(\Exception $e) {
+            \Log::error($e);
+            return \Response::json("Not authenticated", 401);
+        }
     }
 
     protected function getEntries()
@@ -44,6 +49,7 @@ class EntriesController extends Controller
             return \Response::json($entries, 200);
 
         } catch(\Exception $e) {
+            \Log::error($e);
             return \Response::json("Error returning entries data", 401);
 
         }

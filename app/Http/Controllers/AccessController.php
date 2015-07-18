@@ -52,6 +52,7 @@ class AccessController extends Controller
             \Session::put('user', $user);
         } catch(\ErrorException $e){
             //dd($e);
+            \Log::error($e);
             return redirect('/');
         }
 

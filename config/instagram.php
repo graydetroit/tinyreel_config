@@ -46,7 +46,7 @@ return [
         'local' => [
             'client_id' => env('IG_L_ID', null),
             'client_secret' => env('IG_L_SECRET', null),
-            'callback_url' => 'http://tinyreel.jamesgraydev.app/auth',
+            'callback_url' => 'http://ef1be013.ngrok.io/auth',
         ],
 
     ],
