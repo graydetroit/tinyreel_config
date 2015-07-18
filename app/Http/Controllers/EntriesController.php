@@ -20,7 +20,11 @@ class EntriesController extends Controller
             $ig_session_token = session('instagram_token');
             Instagram::setAccessToken($ig_session_token);
         } catch(\Exception $e) {
-            \Log::error($e);
+            //\Log::error($e);
+            if($e->getMessage() !== null && $e->getFile() !== null){
+                $msg = $e->getMessage().' '.$e->getFile();
+                \Bugsnag::notifyError('ErrorType', $msg);
+            }
             return \Response::json("Not authenticated", 401);
         }
     }
@@ -49,7 +53,11 @@ class EntriesController extends Controller
             return \Response::json($entries, 200);
 
         } catch(\Exception $e) {
-            \Log::error($e);
+           // \Log::error($e);
+            if($e->getMessage() !== null && $e->getFile() !== null){
+                $msg = $e->getMessage().' '.$e->getFile();
+                \Bugsnag::notifyError('ErrorType', $msg);
+            }
             return \Response::json("Error returning entries data", 401);
 
         }

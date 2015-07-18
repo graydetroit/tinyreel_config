@@ -52,7 +52,11 @@ class AccessController extends Controller
             \Session::put('user', $user);
         } catch(\ErrorException $e){
             //dd($e);
-            \Log::error($e);
+            //\Log::error($e);
+            if($e->getMessage() !== null && $e->getFile() !== null){
+                $msg = $e->getMessage().' '.$e->getFile();
+                \Bugsnag::notifyError('ErrorType', $msg);
+            }
             return redirect('/');
         }
 
